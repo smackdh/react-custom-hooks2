@@ -1,15 +1,14 @@
-import { useState } from "react";
+// import { useState } from "react";
 
+import useHttp from "../../hooks/use-http";
 import Section from "../UI/Section";
 import TaskForm from "./TaskForm";
 
 const NewTask = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  const error = useHttp();
   const enterTaskHandler = async (taskText) => {
-    setIsLoading(true);
-    setError(null);
     try {
       const response = await fetch(
         "https://react-http-c8445-default-rtdb.firebaseio.com/tasks.json",
@@ -22,9 +21,9 @@ const NewTask = (props) => {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Request failed!");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Request failed!");
+      // }
 
       const data = await response.json();
 
@@ -35,7 +34,7 @@ const NewTask = (props) => {
     } catch (err) {
       setError(err.message || "Something went wrong!");
     }
-    setIsLoading(false);
+    // setIsLoading(false);
   };
 
   return (
